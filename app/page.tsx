@@ -1,3 +1,4 @@
+
 // filepath: app/page.tsx (Next.js App Router & TypeScript 기준)
 "use client";
 import React from 'react';
@@ -138,3 +139,57 @@ const HomePage: NextPage = () => {
 };
 
 export default HomePage;
+/* =======
+'use client';
+
+import { useState, useEffect } from 'react';
+
+// 포스팅 데이터 (화면에 보여줄 내용들)
+const DUMMY_POSTS = [
+  { id: 1, title: 'Figma Study #4', subtitle: '인터랙션 및 프로토타이핑', tag: 'figma' },
+  { id: 2, title: 'Figma Study #5', subtitle: '오토 레이아웃 마스터하기', tag: 'figma' },
+  { id: 3, title: 'Figma Study #6', subtitle: '디자인 시스템 기초', tag: 'figma' },
+  { id: 4, title: 'Figma Study #7', subtitle: '개발자 핸드오프 가이드', tag: 'figma' },
+];
+
+export default function Home() {
+  // 애니메이션 상태: 'initial'(처음) -> 'expanding'(늘어남) -> 'finished'(메인화면)
+  const [animationState, setAnimationState] = useState<'initial' | 'expanding' | 'finished'>('initial');
+
+  useEffect(() => {
+    // 1초 뒤에 애니메이션 시작
+    const timer1 = setTimeout(() => setAnimationState('expanding'), 1000);
+    // 총 2.5초 뒤에 메인 화면으로 전환
+    const timer2 = setTimeout(() => setAnimationState('finished'), 2500);
+    return () => { clearTimeout(timer1); clearTimeout(timer2); };
+  }, []);
+
+  // 1. 인트로 애니메이션 화면 (It's -> Itzel's log)
+  if (animationState !== 'finished') {
+    return (
+      <div className="flex items-center justify-center h-screen bg-white font-mono text-5xl sm:text-7xl text-black overflow-hidden">
+        <div className="flex items-baseline">
+          {/* It }
+          <span className={`transition-transform duration-1000 ${animationState === 'expanding' ? '-translate-x-4' : ''}`}>
+            It
+          </span>
+          
+          {/* zel (숨겨져 있다가 나타남) }
+          <div className={`overflow-hidden transition-all duration-1000 flex items-center ${animationState === 'expanding' ? 'max-w-[200px] opacity-100' : 'max-w-0 opacity-0'}`}>
+            <span className="whitespace-nowrap">zel</span>
+          </div>
+
+          {/* 's (고정되거나 약간 이동) }
+          <span className={`transition-transform duration-1000 ${animationState === 'expanding' ? 'translate-x-0' : ''}`}>
+            &rsquo;s
+          </span>
+
+          {/* log (숨겨져 있다가 나타남) }
+          <div className={`overflow-hidden transition-all duration-1000 flex items-center ${animationState === 'expanding' ? 'max-w-[200px] opacity-100' : 'max-w-0 opacity-0'}`}>
+            <span className="whitespace-nowrap ml-3">log</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+*/
