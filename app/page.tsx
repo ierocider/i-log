@@ -1,65 +1,140 @@
-import Image from "next/image";
+// filepath: app/page.tsx (Next.js App Router & TypeScript 기준)
+"use client";
+import React from 'react';
+import type { NextPage } from 'next'; 
+import { Roboto, Roboto_Mono } from 'next/font/google';
 
-export default function Home() {
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'], // 필요한 굵기만 선택
+});
+const robotoMono = Roboto_Mono({
+  subsets: ['latin'],
+  weight: ['400', '700'], // 필요한 굵기만 선택
+});
+
+// ----------------------------------------------------
+// 1. 오리 프로필 사진 데이터 (공개 URL 사용)
+// ----------------------------------------------------
+const HomePage: NextPage = () => {
+  
+  // 임시 메뉴 및 태그 데이터
+  const menuItems = ['IT Study', 'Graphic Study', 'Design Study', 'Projects', '자격증 준비 기록'];
+  const tags = ['figma', 'XD', 'React', 'Next.js', 'Tailwind'];
+  
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+    <div className={`min-h-screen bg-white ${roboto.className}`}>
+      
+      {/* ----------------------------------------------------
+      // 2. 상단 헤더 영역 - font-mono가 기본으로 적용됨
+      // ---------------------------------------------------- */}
+      <header className="h-14 sm:h-18 bg-yellow-50 flex items-center justify-center 
+                         transition-all duration-100">
+        <h1 className={`text-sm sm:text-base text-gray-700 tracking-wider ${robotoMono.className}`}> 
+          itzel's Log
+        </h1>
+      </header>
+
+      {/* ----------------------------------------------------
+      // 3. 페이지 본문 영역 (좌/우 2단 레이아웃)
+      // ---------------------------------------------------- */}
+      <main className="p-4 md:p-8 mt-16">
+        <div className="max-w-6xl mx-auto">
+          
+          {/* 3-1. 프로필 영역 (페이지 상단, 좌측에 배치) */}
+          <div className="mb-10 p-4 md:p-0"> 
+            <div className="flex items-center space-x-4">
+              
+              {/* 프로필 이미지 */}
+              <div className="flex-shrink-0">
+                <img 
+                  src="/ketchup.png"
+                  alt="Itzel's Profile Picture (Tomato Duck)" 
+                  className="w-32 sm:w-36 md:w-40 lg:w-44 h-auto rounded-lg object-cover "
+                  width={96}
+                  height={96}
+                />
+              </div>
+              
+              {/* 이름 및 연락처: 사진 옆에 수직으로 정렬 (X축 일치) */}
+              <div className="flex flex-col justify-center"> 
+                <h2 className="text-lg text-gray-900"> 
+                  Itzel Cheong
+                </h2>
+                <p className="text-gray-600 text-sm mt-2">
+                  "To do is to be."
+                </p>
+                {/* 연락처 및 GitHub 링크: 이름과 X축을 맞추기 위해 여기에 배치 */}
+                <div className="border-t border-gray-300 mt-9 pt-4 text-xs text-gray-500 space-y-1">
+                  <p>📧 aiueo22@konkuk.ac.kr</p>
+                  <p>🔗 <a href="https://github.com/ierocider" className="text-gray-500 hover:text-black" target="_blank" rel="noopener noreferrer">github.com/ierocider</a></p>
+                </div>
+              </div>
+            </div>
+            <hr className="my-6 border-gray-200 md:hidden" /> {/* 모바일용 구분선 */}
+          </div>
+
+          {/* 3-2. 메인 콘텐츠 영역 (카테고리/태그/글) */}
+          <div className="md:grid md:grid-cols-12 md:gap-8 mt-20">
+            
+            {/* 좌측: 카테고리 (12칸 중 3칸) */}
+            <div className="md:col-span-3 mb-8 md:mb-0">
+              
+              {/* 카테고리 제목 */}
+              <h3 className="text-base font-semibold text-gray-800 mb-3">Categories</h3>
+              <nav className="space-y-2">
+                {menuItems.map(item => (
+                  <a key={item} href="#" className="block px-3 py-2 text-gray-800 hover:font-semibold hover:bg-yellow-50 rounded-lg transition-colors duration-150">
+                    {item}
+                  </a>
+                ))}
+              </nav>
+              
+            </div>
+            
+            {/* 우측: 태그와 글 목록 (12칸 중 9칸) */}
+            <div className="md:col-span-9">
+              
+              {/* === 태그 영역 (카테고리와 같은 Y축에 배치) === */}
+              <div className="mb-10">
+                <h3 className="text-base font-semibold text-gray-800 mb-3">Tags</h3> {/* 카테고리 제목과 같은 스타일/Y축 */}
+                <div className="flex flex-wrap gap-2">
+                  {tags.map(tag => (
+                    <span key={tag} style={{ color: "#DF5F2C", borderColor: "#DF5F2C" }}
+                      className="px-3 py-1 text-sm font-medium rounded-full border
+                                 bg-transparent hover:bg-red-100 cursor-pointer transition-colors duration-150">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* === 글(포스트) 영역 (태그 바로 밑에 존재) === */}
+
+              {/* 임시 포스트 카드 목록 (3열 그리드) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[1, 2, 3].map((num) => (
+                  <div key={num} 
+                  className="bg-white p-6 rounded-xl transition-shadow duration-300 cursor-pointer"
+                  style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.05), 0 0 8px rgba(0,0,0,0.05)" }}
+                  onMouseEnter={(e) => {
+                        e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.15)";}}
+                  onMouseLeave={(e) => {
+                        e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.05), 0 0 8px rgba(0,0,0,0.05)";}}>
+                    <h4 className="text-3xl text-gray-900 mb-2">Figma Study #{num}</h4>
+                    <p className="text-gray-800 text-xs">인터랙션 및 프로토타이핑</p>
+                    <span className="mt-4 inline-block text-xs text-gray-400">2025.11.24</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+          </div>
+
         </div>
       </main>
     </div>
   );
-}
+};
+
+export default HomePage;
